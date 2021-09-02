@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1630592149 source:c:\data\code\praktikum strukdat\prak 1\titik.c
+	<stdio.h>
+	<math.h>
+	"titik.h"
+
+1630586990 c:\data\code\praktikum strukdat\prak 1\titik.h
+
+1584205420 source:c:\data\code\praktikum strukdat\prak 1\titik\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1630591620 source:c:\data\code\praktikum strukdat\prak 1\maintitik.c
+	<stdio.h>
+	"titik.h"
+
