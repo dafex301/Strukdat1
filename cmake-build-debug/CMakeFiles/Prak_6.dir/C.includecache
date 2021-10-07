@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/DATA/Code/PRAKTIKUM STRUKDAT/Prak 6/boolean.h
+
+C:/DATA/Code/PRAKTIKUM STRUKDAT/Prak 6/lstack.c
+lstack.h
+C:/DATA/Code/PRAKTIKUM STRUKDAT/Prak 6/lstack.h
+stdlib.h
+-
+stdio.h
+-
+
+C:/DATA/Code/PRAKTIKUM STRUKDAT/Prak 6/lstack.h
+stdio.h
+-
+stdlib.h
+-
+boolean.h
+C:/DATA/Code/PRAKTIKUM STRUKDAT/Prak 6/boolean.h
+
