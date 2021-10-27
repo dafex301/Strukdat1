@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/DATA/Code/PRAKTIKUM STRUKDAT/Prak 8/list1.h
+stdio.h
+-
+stdlib.h
+-
+
+C:/DATA/Code/PRAKTIKUM STRUKDAT/Prak 8/mainlist1.c
+stdio.h
+-
+stdlib.h
+-
+list1.h
+C:/DATA/Code/PRAKTIKUM STRUKDAT/Prak 8/list1.h
+

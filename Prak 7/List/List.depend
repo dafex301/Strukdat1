@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1635351050 source:c:\data\code\praktikum strukdat\prak 8\list1.c
+	<stdio.h>
+	<stdlib.h>
+	"list1.h"
+
+1635344146 c:\data\code\praktikum strukdat\prak 8\list1.h
+	<stdio.h>
+	<stdlib.h>
+
