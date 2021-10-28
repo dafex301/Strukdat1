@@ -1,3 +1,9 @@
+/* Program   : list1.c */
+/* Deskripsi : file REALISASI modul linked list */
+/* NIM/Nama  : 24060120130106 / Fahrel Gibran Alghany */
+/* Tanggal   : 26/10/2021 */
+/***********************************/
+
 #ifndef list1_C
 #define list1_C
 #include <stdio.h>
@@ -285,6 +291,7 @@ void DelVAfter (List *L, infotype *X, infotype Prec) {
         Pdel = next(P);
         *X = info(Pdel);
         DelAfter(&(*L), &Pdel, P);
+        Dealokasi(Pdel);
     }
 }
 

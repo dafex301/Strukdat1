@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1632398367 source:c:\data\code\praktikum strukdat\prak 4\main.c
+	<stdio.h>
+	<stdlib.h>
+	"boolean.h"
+	"tqueue.h"
+
+1632126117 c:\data\code\praktikum strukdat\prak 4\boolean.h
+
+1632400266 c:\data\code\praktikum strukdat\prak 4\tqueue.h
+	"boolean.h"
+
+1632411582 source:c:\data\code\praktikum strukdat\prak 4\tqueue.c
+	"boolean.h"
+	"tqueue.h"
+	<stdio.h>
+	<stdlib.h>
+

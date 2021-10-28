@@ -1,0 +1,3 @@
+C:/DATA/Code/PRAKTIKUM STRUKDAT/Belajar/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/DATA/Code/PRAKTIKUM STRUKDAT/Belajar/cmake-build-debug/CMakeFiles/Belajar.dir
+C:/DATA/Code/PRAKTIKUM STRUKDAT/Belajar/cmake-build-debug/CMakeFiles/rebuild_cache.dir

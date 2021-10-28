@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1631794641 source:c:\data\code\praktikum strukdat\prak 3b\tstack.c
+	<stdio.h>
+	<stdlib.h>
+	"tstack.h"
+	"boolean.h"
+	<string.h>
+
+1631794672 source:c:\data\code\praktikum strukdat\prak 3b\main.c
+	<stdio.h>
+	<stdlib.h>
+	"boolean.h"
+	"tstack.h"
+
+1631792838 c:\data\code\praktikum strukdat\prak 3b\boolean.h
+
+1631793068 c:\data\code\praktikum strukdat\prak 3b\tstack.h
+	<stdio.h>
+	"boolean.h"
+

@@ -1,0 +1,22 @@
+void mengantre(Q, W)
+// kamus lokal
+i: integer
+
+// algoritma
+if (not (Q.tail = 1 && Q.head = 5)) then
+    i <- 1
+    if (W.kelompok = 'L') then
+        while (W.kelompok = Q.wadah[i])
+            i <- i + 1
+    else
+        while (W.kelompok =/= Q.wadah[i])
+            i <- i + 1
+        while (W.kelompok = Q.wadah[i])
+            i <- i + 1
+    j <- (*Q).tail;
+    while(j >= i) do
+        (*Q).wadah[j+1] = (*Q).wadah[j];
+        j <- j - 1
+    {endwhile}
+    (Q).wadah[j+1] = P;
+    (Q).tail++;

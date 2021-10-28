@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/DATA/Code/PRAKTIKUM STRUKDAT/Belajar/single-linked-list.c
+stdio.h
+-
+stdlib.h
+-
+

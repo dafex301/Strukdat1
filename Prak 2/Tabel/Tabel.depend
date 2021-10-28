@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1631180738 source:c:\data\code\praktikum strukdat\prak 2\main.c
+	<stdio.h>
+	<stdlib.h>
+	"tabel.h"
+
+1631180747 source:c:\data\code\praktikum strukdat\prak 2\tabel.c
+	<stdio.h>
+	<stdlib.h>
+	"tabel.h"
+
+1631165882 c:\data\code\praktikum strukdat\prak 2\tabel.h
+	<stdio.h>
+	"boolean.h"
+
+1631162497 c:\data\code\praktikum strukdat\prak 2\boolean.h
+

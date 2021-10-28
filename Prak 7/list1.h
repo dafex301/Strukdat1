@@ -1,7 +1,8 @@
-/* File : list1.h */
-/* contoh ADT list berkait dengan representasi fisik pointer */
-/* Representasi address dengan pointer */
-/* infotype adalah integer */
+/* Program   : list1.h */
+/* Deskripsi : file HEADER modul linked list */
+/* NIM/Nama  : 24060120130106 / Fahrel Gibran Alghany */
+/* Tanggal   : 26/10/2021 */
+/***********************************/
 
 #ifndef list1_H
 #define list1_H
@@ -141,6 +142,8 @@ int NbElmt (List L);
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
 
 address searchAddress (List L, infotype X);
+// mencari address dari infotype X
+
 
 
 #endif

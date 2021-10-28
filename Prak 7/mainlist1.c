@@ -1,6 +1,13 @@
+/* Program   : mainlist1.c */
+/* Deskripsi : file DRIVER modul linked list */
+/* NIM/Nama  : 24060120130106 / Fahrel Gibran Alghany */
+/* Tanggal   : 26/10/2021 */
+/***********************************/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "list1.h"
+#include "list1.c"
 
 int main() {
     // KAMUS
@@ -11,7 +18,7 @@ int main() {
 
     // Algoritma
     printf("================FAHREL GIBRAN ALGHANY================");
-    printf("\n====================24060120130106===================\n\n");
+    printf("\n====================24060120130106===================\n");
 
     printf("\n================Create List================\n\n");
     CreateList(&A);
