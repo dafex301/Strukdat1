@@ -1,2 +1,3 @@
-
-    // InsVAfter(&A, 7, 3);
+    // printf("\n================FInversList================\n");
+    // C = FInversList(B);
+    // printf("Sesudah: "); PrintInfo(C);

@@ -71,11 +71,13 @@ void InsertFirst (List *L, address P){
    F.S.		: Menambahkan elemen ber-address P sebagai elemen pertama */
 
     // kamus lokal
+
+    // algoritma
     next(P) = First(*L);
     First(*L) = P;
 }
 
-void InsertAfter (address P, address Prec){
+void InsertAfter (List *L, address P, address Prec){
 /* I.S.		: Prec pastilah elemen list dan bukan elemen terakhir,
 	          P sudah dialokasi
    F.S. 	: Insert P sebagai elemen sesudah elemen beralamat Prec */
@@ -103,7 +105,7 @@ void InsertLast (List *L, address P) {
         while (next(Last) != Nil) {
             Last = next(Last);
         }
-        InsertAfter(P, Last);
+        InsertAfter(&(*L), P, Last);
     }
 }
 
@@ -199,7 +201,28 @@ void InsVLast (List *L, infotype X) {
     }
 }
 
-void InsVAfter (List *L, infotype X, infotype Y ){
+void InsVAfter (List *L, infotype X) {
+/* I.S. 	: L mungkin kosong 
+   F.S.		: X ditambahkan sebagai elemen setelah Prec
+   Proses 	: Melakukan alokasi sebuah elemen dan menambahkan elemen list
+   			  setelah Prec yaitu 
+   			  jika alokasi berhasil, elemen setelah Prec yang baru bernilai X
+   			  Jika alokasi gagal, maka I.S.= F.S. */
+
+    // kamus lokal
+    address P, Prec, Last;
+    
+    // algoritma
+    P = Alokasi(X);
+    if (!ListEmpty(*L)) {
+        AdrLast(&(*L), &Prec, &Last);
+        InsertAfter(&(*L), P, Prec);
+    } else {
+        InsVFirst(&(*L), X);
+    }
+}
+
+void InsVAfter2 (List *L, infotype X, infotype Prec ){
     /* I.S. 	: L mungkin kosong
     F.S.		: X ditambahkan sebagai elemen setelah Prec
     Proses 	: Melakukan alokasi sebuah elemen dan menambahkan elemen list
@@ -207,14 +230,14 @@ void InsVAfter (List *L, infotype X, infotype Y ){
             jika alokasi berhasil, elemen setelah Prec yang baru bernilai X
    			Jika alokasi gagal, maka I.S.= F.S. */
     // kamus lokal
-    address P, Prec;
+    address P, Q;
 
     // algoritma
     P = Alokasi(X);
-    Prec = searchAddress(*L, Y);
-    if (Prec != Nil) {
+    Q = Search(*L, Prec);
+    if (Q != Nil) {
         if(!ListEmpty(*L)) {
-            InsertAfter(P, Prec);
+            InsertAfter(&(*L), P, Q);
         } else {
             InsertFirst(&(*L), P);
         }
@@ -277,7 +300,24 @@ void DelVLast (List *L, infotype *X) {
     Dealokasi(Last);
 }
 
-void DelVAfter (List *L, infotype *X, infotype Prec) {
+void DelVAfter (List *L, infotype *X) {
+/* I.S.		: List L tidak kosong
+   F.S.		: Elemen list setelah Prec dihapus : nilai info disimpan pada X
+   			  dan alamat elemen setelah Prec di-dealokasi */
+
+    // kamus lokal
+    address P, Prec, Last;
+
+    // Algoritma
+    if (!ListEmpty(*L)) {
+        AdrLast(&(*L), &Prec, &Last);
+        *X = info(next(Prec));
+        DelAfter(&(*L), &P, Prec);
+        Dealokasi(P);
+    }
+}
+
+void DelVAfter2 (List *L, infotype *X, infotype Prec) {
 /* I.S.		: List L tidak kosong
    F.S.		: Elemen list setelah Prec dihapus : nilai info disimpan pada X
    			  dan alamat elemen setelah Prec di-dealokasi */
@@ -286,7 +326,7 @@ void DelVAfter (List *L, infotype *X, infotype Prec) {
     address P, Pdel;
     
     // algoritma
-    P = searchAddress(*L, Prec);
+    P = Search(*L, Prec);
     if (P != Nil) {
         Pdel = next(P);
         *X = info(Pdel);
@@ -335,17 +375,39 @@ int NbElmt (List L) {
     return i;
 }
 
-address searchAddress (List L, infotype X) {
-    // mencari address dari infotype X
+infotype Average(List L) {
+/* Mengirimkan nilai rata-rata info(P) */
+
+    // kamus lokal
+    address P;
+    infotype i, sum;
+
+    // algoritma
+    P = First(L);
+    i = 0;
+    sum = 0;
+    while (P!=Nil) {
+        i++;
+        sum += info(P);
+        P = next(P);
+    }
+    return (sum / i);
+}
+
+/****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
+
+address Search (List L, infotype X) {
+    /* Mencari apakah ada elemen list dengan info(P)= X */ 
+    /* Jika ada, mengirimkan address elemen tersebut. */ 
+    /* Jika tidak ada, mengirimkan Nil */ 
     
     // kamus lokal
     address P;
-    int i = 100;
 
     // algoritma
     if (!ListEmpty(L)) {
         P = First(L);
-        while (info(P) != X && next(P) != Nil) {
+        while (info(P) != X && P != Nil) {
             P = next(P);
         }
         if (info(P) == X) {
@@ -355,5 +417,228 @@ address searchAddress (List L, infotype X) {
         }
     }
 }
+
+boolean FSearch (List L, address P) {
+/* Mencari apakah ada elemen list yang beralamat P */
+/* Mengirimkan true jika ada, false jika tidak ada */
+
+    // kamus lokal
+    address Psearch;
+
+    // algoritma
+    if (!ListEmpty(L)) {
+        Psearch = First(L);
+        while (P != Psearch && Psearch != Nil) {
+            Psearch = next(Psearch);
+        }
+        return P == Psearch;
+    }
+    else {
+        return false;
+    }
+}
+
+address SearchPrec (List L, infotype X) {
+/* Mengirimkan address elemen sebelum elemen yang nilainya=X */
+/* Mencari apakah ada elemen list dengan info(P)= X */
+/* Jika ada, mengirimkan address Prec, dengan Next(Prec)=P */
+/* dan Info(P)=X. */
+/* Jika tidak ada, mengirimkan Nil */
+/* Jika P adalah elemen pertama, maka Prec=Nil */
+/* Search dengan spesifikasi seperti ini menghindari */
+/* traversal ulang jika setelah Search akan dilakukan operasi lain*/
+
+    // kamus Lokal
+    address P, Prec;
+
+    // algoritma
+    if (!ListEmpty(L)) {
+        P = First(L);
+        Prec = Nil;
+        while (info(P) != X && P != Nil) {
+            Prec = P;
+            P = next(P);
+        }
+        if (info(P) == X) {
+            return Prec;
+        } else {
+            return Nil;
+        }
+    }
+}
+
+/****************** PROSES TERHADAP LIST ******************/
+
+void DelAll (List *L) {
+/* I.S. sembarang */
+/* F.S. Delete semua elemen list dan alamat elemen di-dealokasi */
+/*      List L menjadi list kosong */
+
+    // kamus lokal
+    infotype del;
+
+    // algoritma
+    while (First(*L) != Nil) {
+        DelVFirst(&(*L), &del);
+    }
+}
+
+void InversList (List *L) {
+/* I.S. sembarang. */
+/* F.S. elemen list dibalik : */
+/* Elemen terakhir menjadi elemen pertama, dan seterusnya. */
+/* Membalik elemen list, tanpa melakukan alokasi/dealokasi. */
+    
+    // kamus lokal
+    address P, Prec, Next;
+
+    // algoritma
+    P = First(*L);
+    Prec = Nil;
+    while (P != Nil) {
+        Next = next(P);
+        next(P) = Prec;
+        Prec = P;
+        P = Next;
+    }
+    First(*L) = Prec;
+}
+
+List FInversList (List L) {
+/* Mengirimkan list baru, hasil invers dari L */
+/* dengan menyalin semua elemn list. Alokasi mungkin gagal. */
+/* Jika alokasi gagal, hasilnya list kosong */
+/* dan semua elemen yang terlanjur di-alokasi, harus didealokasi */
+
+    // kamus Lokal
+    List Lnew;
+    address P;
+
+    // algoritma
+    CreateList(&Lnew);
+    if (!ListEmpty(L)) {
+        P = First(L);
+        while (P != Nil) {
+            InsVFirst(&Lnew, info(P));
+            P = next(P);
+        }
+        return Lnew;
+    }
+}
+
+void CopyList (List *L1, List *L2) {
+/* I.S. L1 sembarang. F.S. L2=L1 */
+/* L1 dan L2 "menunjuk" kepada list yang sama.*/
+/* Tidak ada alokasi/dealokasi elemen */
+
+    // kamus lokal
+
+    // algoritma
+    First(*L2) = First(*L1);
+}
+
+List FCopyList (List L) {
+/* Mengirimkan list yang merupakan salinan L */
+/* dengan melakukan alokasi. */
+/* Jika ada alokasi gagal, hasilnya list kosong dan */
+/* semua elemen yang terlanjur di-alokasi, harus didealokasi */
+
+    // kamus lokal
+    List Lnew;
+    address P;
+
+    // algoritma
+    CreateList(&Lnew);
+    if (!ListEmpty(L)) {
+        P = First(L);
+        while (P != Nil) {
+            InsVLast(&Lnew, info(P));
+            P = next(P);
+        }
+        return Lnew;
+    }
+}
+
+void CpAlokList (List Lin, List *Lout) {
+/* I.S. Lin sembarang. */
+/* F.S. Jika semua alokasi berhasil,maka Lout berisi hasil copy Lin */
+/* Jika ada alokasi yang gagal, maka Lout=Nil dan semua elemen yang terlanjur dialokasi, didealokasi */
+/* dengan melakukan alokasi elemen. */
+/* Lout adalah list kosong jika ada alokasi elemen yang gagal */
+
+    // kamus lokal
+    address P;
+
+    // algoritma
+    P = First(Lin);
+    while (P != Nil) {
+        InsVLast(&(*Lout), info(P));
+        P = next(P);
+    }
+}
+
+void Konkat (List L1, List L2, List *L3) {
+/* I.S. L1 dan L2 sembarang */
+/* F.S. L1 dan L2 tetap, L3 adalah hasil konkatenasi L1 & L2 */
+/* Jika semua alokasi berhasil, maka L3 adalah hasil konkatenasi*/
+/* Jika ada alokasi yang gagal, semua elemen yang sudah dialokasi */
+/* harus di-dealokasi dan L3=Nil*/
+/* Konkatenasi dua buah list : L1 & L2 menghasilkan L3 yang “baru” */
+/* Elemen L3 adalah hasil alokasi elemen yang “baru”. */
+/* Jika ada alokasi yang gagal, maka L3 harus bernilai Nil*/
+/* dan semua elemen yang pernah dialokasi didealokasi */
+    
+    // kamus lokal
+
+    // algoritma
+    CpAlokList(L1, &(*L3));
+    CpAlokList(L2, &(*L3));
+}
+
+void Konkat1 (List *L1, List *L2, List *L3) {
+/* I.S. L1 dan L2 sembarang */
+/* F.S. L1 dan L2 kosong, L3 adalah hasil konkatenasi L1 & L2 */
+/* Konkatenasi dua buah list : L1 dan L2 */
+/* menghasilkan L3 yang baru (dengan elemen list L1 dan L2)*/
+/* dan L1 serta L2 menjadi list kosong.*/
+/* Tidak ada alokasi/dealokasi pada prosedur ini */
+
+    // kamus lokal
+    address Prec, Last;
+
+    // algoritma
+    First(*L3) = First(*L1);
+    AdrLast(&(*L3), &Prec, &Last);
+    next(Last) = First(*L2);
+    First(*L1) = Nil;
+    First(*L2) = Nil;
+}
+
+void PecahList (List *L1, List *L2, List L) {
+/* I.S. L mungkin kosong */
+/* F.S. Berdasarkan L, dibentuk dua buah list L1 dan L2 */
+/* L tidak berubah: untuk membentuk L1 dan L2 harus alokasi */
+/* L1 berisi separuh elemen L dan L2 berisi sisa elemen L */
+/* Jika elemen L ganjil, maka separuh adalah NbElmt(L) div 2 */
+
+    // kamus lokal
+    int len, i;
+    address P;
+    
+    // algoritma
+    P = First(L);
+    len = NbElmt(L)/2;
+    i = 0;
+    while (i < len) {
+        InsVLast(&(*L1), info(P));
+        P = next(P);
+        i++;
+    }
+    while (P != Nil) {
+        InsVLast(&(*L2), info(P));
+        P = next(P);
+    }
+}
+
 
 #endif
